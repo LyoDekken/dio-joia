@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
     console.error("API Error:", error);
     return {
       props: {
-        productsArray: [],
+        product: [],
       },
       revalidate: 60 * 60 * 1,
     };

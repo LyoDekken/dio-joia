@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 
 import { api } from "@/lib/axios";
 import ProductHoverify from "./components";
 
-export default function Produto({ product }: any) {
-  const [stock, setStock] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const responseStock = await api.get("/stocks");
-        setStock(responseStock.data.data);
-      } catch (error) {
-        console.error("API Error:", error);
-      }
-    }
-
-    fetchData();
-  }, []);
-
+export default function Produto({ product, stock }: any) {
   const images = [
     `${product.thumb.file_url}`,
     "https://diojoiasemprata.com.br/wp-content/uploads/2022/06/WhatsApp-Image-2023-02-07-at-15.06.48.jpeg",
@@ -45,10 +30,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     const response = await api.get(`stocks/${productId}`);
+    const responseStock = await api.get("/stocks");
 
     return {
       props: {
         product: response.data.data,
+        stock: responseStock.data.data,
       },
     };
   } catch (error) {
@@ -56,6 +43,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       props: {
         product: [],
+        stock: [],
       },
       revalidate: 60 * 60 * 1,
     };

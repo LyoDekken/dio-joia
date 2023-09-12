@@ -30,12 +30,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           siteName: "Diô Joias em Prata",
         }}
       />
-      <ProductProvider>
-        <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
-        <Component {...pageProps} />
-        <WhatsAppIcon />
-        <FooterHomeHoverify />
-      </ProductProvider>
+
+      <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
+      <Component {...pageProps} />
+      <WhatsAppIcon />
+      <FooterHomeHoverify />
 
       <GlobalStyles />
     </ThemeProvider>

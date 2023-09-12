@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   ContainerArticle,
@@ -11,19 +11,26 @@ import {
 import SumaryProduct from "./SumaryProduct";
 import Wrap from "./Wrap";
 import CardRelationProduct from "./CardRelationProduct";
+import { Product } from "@/shared/types";
 
-export default function ProductHoverify({ product, imageLinks, stock }: any) {
-  const [selectedImage, setSelectedImage] = useState(imageLinks[0]);
+interface Props {
+  product: Product;
+  imageLinks: string[];
+  stock: any[]; // You should specify the structure of stock data
+}
 
-  const handleImageClick = (newImage: string) => {
-    setSelectedImage(newImage);
-  };
+export default function ProductHoverify({ product, imageLinks, stock }: Props) {
+  //const [selectedImage, setSelectedImage] = useState(imageLinks[0]);
+
+  // const handleImageClick = (newImage: string) => {
+  //   setSelectedImage(newImage);
+  // };
 
   return (
     <Container>
       <ContainerArticle>
         <DivImage>
-          <ZoomImage height="1000" width="1000" alt="" src={selectedImage} />
+          <ZoomImage height="1000" width="1000" alt="" src={imageLinks[0]} />
           <ImagesContainerOl>
             {imageLinks.map((link: any, index: any) => (
               <ImagesContainerLi key={index}>
@@ -32,7 +39,6 @@ export default function ProductHoverify({ product, imageLinks, stock }: any) {
                   width="100"
                   alt=""
                   src={link}
-                  onClick={() => handleImageClick(link)}
                 />
               </ImagesContainerLi>
             ))}

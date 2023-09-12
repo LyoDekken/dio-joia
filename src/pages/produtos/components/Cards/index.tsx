@@ -20,6 +20,7 @@ export default function Cards({ stock }: any) {
     { number: 3, link: "https://diojoiasemprata.com.br/produtos/page/3/" },
     { number: 4, link: "https://diojoiasemprata.com.br/produtos/page/4/" },
   ];
+  
   return (
     <Container>
       <SectionContainer>

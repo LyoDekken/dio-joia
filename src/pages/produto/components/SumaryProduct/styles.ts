@@ -343,7 +343,7 @@ export const NavContainerParcelaPricing = styled.p`
   text-align: left;
 `;
 
-export const NumerationForm = styled.form`
+export const NumerationForm = styled.table`
   box-sizing: inherit;
   color: #4a4a4a;
   margin: 0px 0px 1.2em;

@@ -140,7 +140,7 @@ export const SideBarFormSearchIconButton = styled.button`
 // `;
 
 
-export const SideBarTitle = styled.div`
+export const SideBarTitle = styled.p`
   box-sizing: inherit;
   clear: both;
   color: #bf9877;

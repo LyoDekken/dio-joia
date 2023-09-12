@@ -10,7 +10,8 @@ const nextConfig = {
   images: {
     domains: [
       'diojoiasemprata.com.br',
-      'job.risestudio.com.br'
+      'job.risestudio.com.br',
+      'i.gifer.com'
     ],
   }
 }

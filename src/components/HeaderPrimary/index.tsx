@@ -7,7 +7,6 @@ import {
   HeaderSectionLink,
   ArrowDownSpan,
 } from "./styles";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import ProductModal from "@/pages/home/components/ProductModal";
 
@@ -21,7 +20,6 @@ export default function HeadePrimary() {
   const handleNav = () => {
     router.push("/produtos");
   };
-  const [showProductModal, setShowProductModal] = useState(false);
 
   return (
     <>
@@ -32,11 +30,7 @@ export default function HeadePrimary() {
               <HeaderSectionLink onClick={handleHome}>Home</HeaderSectionLink>
               <HeaderSectionLink>Sobre Nós</HeaderSectionLink>
               <HeaderSectionLink>Seja um Representante</HeaderSectionLink>
-              <HeaderSectionLink
-                onClick={handleNav}
-                onMouseEnter={() => setShowProductModal(true)}
-                onMouseLeave={() => setShowProductModal(false)}
-              >
+              <HeaderSectionLink onClick={handleNav}>
                 Produtos
                 <ArrowDownSpan>
                   <CaretDown size={16} />
@@ -47,7 +41,6 @@ export default function HeadePrimary() {
             </HeaderSectionUl>
           </AboveHeaderPrimaryWrapSection>
         </AboveHeaderPrimaryWrap>
-        {showProductModal && <ProductModal />}
       </AboveHeaderBarPrimary>
     </>
   );

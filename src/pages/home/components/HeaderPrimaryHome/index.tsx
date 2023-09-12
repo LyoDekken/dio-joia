@@ -22,7 +22,7 @@ export default function HeadePrimaryHome() {
     router.push("/produtos");
   };
 
-  const [showProductModal, setShowProductModal] = useState(false);
+  //const [showProductModal, setShowProductModal] = useState(false);
 
   return (
     <>
@@ -35,8 +35,7 @@ export default function HeadePrimaryHome() {
               <HeaderSectionLink>Seja um Representante</HeaderSectionLink>{" "}
               <HeaderSectionLink
                 onClick={handleNav}
-                onMouseEnter={() => setShowProductModal(true)}
-                onMouseLeave={() => setShowProductModal(false)}
+            
               >
                 Produtos
                 <ArrowDownSpan>
@@ -48,7 +47,7 @@ export default function HeadePrimaryHome() {
             </HeaderSectionUl>
           </AboveHeaderPrimaryWrapSection>
         </AboveHeaderPrimaryWrap>
-        {showProductModal && <ProductModal />}
+     
       </AboveHeaderBarPrimary>
     </>
   );
