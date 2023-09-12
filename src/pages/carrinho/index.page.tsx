@@ -391,42 +391,45 @@ const Cart = () => {
               </FinalizationBuy>
             </div>
           ) : (
-            <DivResponsive>
-              <DivTableTh>
-                <DivTH>Excluir</DivTH>
-                <DivTH>Image</DivTH>
-                <DivTH>Produto</DivTH>
-                <DivTH>Preço</DivTH>
-                <DivTH>Quantidade</DivTH>
-                <DivTH>Subtotal</DivTH>
-              </DivTableTh>
-              {itemArray.map((item: any, index: number) => (
-                <DivTableTd key={index}>
-                  <DivTH>
-                    <XCircle
-                      cursor={"pointer"}
-                      onClick={() => handleRemoveFromCart()}
-                      size={32}
-                    />
-                  </DivTH>
-                  <DivTH>
-                    <ImageCarrinho
-                      alt="Carrrinho Produto"
-                      height={300}
-                      width={300}
-                      src={
-                        "https://diojoiasemprata.com.br/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-28-at-08.44.03-2-300x300.jpeg"
-                      }
-                    />
-                  </DivTH>
-                  <DivTH>{item.title}</DivTH>
-                  <DivTH>R${item?.value}</DivTH>
-                  <DivTH>
-                    <NavContainerInputSelect />
-                  </DivTH>
-                  <DivTH>R${item?.value}</DivTH>
-                </DivTableTd>
-              ))}
+            <>
+              <DivResponsive>
+                <DivTableTh>
+                  <DivTH>Excluir</DivTH>
+                  <DivTH>Image</DivTH>
+                  <DivTH>Produto</DivTH>
+                  <DivTH>Preço</DivTH>
+                  <DivTH>Quantidade</DivTH>
+                  <DivTH>Subtotal</DivTH>
+                </DivTableTh>
+                {itemArray.map((item: any, index: number) => (
+                  <DivTableTd key={index}>
+                    <DivTH>
+                      <XCircle
+                        cursor={"pointer"}
+                        onClick={() => handleRemoveFromCart()}
+                        size={32}
+                      />
+                    </DivTH>
+                    <DivTH>
+                      <ImageCarrinho
+                        alt="Carrrinho Produto"
+                        height={300}
+                        width={300}
+                        src={
+                          "https://diojoiasemprata.com.br/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-28-at-08.44.03-2-300x300.jpeg"
+                        }
+                      />
+                    </DivTH>
+                    <DivTH>{item.title}</DivTH>
+                    <DivTH>R${item?.value}</DivTH>
+                    <DivTH>
+                      <NavContainerInputSelect />
+                    </DivTH>
+                    <DivTH>R${item?.value}</DivTH>
+                  </DivTableTd>
+                ))}
+              </DivResponsive>
+
               <DivCart>
                 {itemArray && (
                   <ValorTotal>
@@ -440,7 +443,7 @@ const Cart = () => {
                   </BackButton>
                 </FinalizationBuy>
               </DivCart>
-            </DivResponsive>
+            </>
           )}
         </Article>
       </ContainerDiv>

@@ -22,10 +22,21 @@ import {
   AboveHeaderWrap,
 } from "./styles";
 import HeadePrimaryHome from "../HeaderPrimaryHome";
+import { useRouter } from "next/router";
 
 export default function HeaderHome() {
   const leftIcons = [FacebookLogo, InstagramLogo, PinterestLogo];
   const rightIcons = [User, MagnifyingGlass, Bag];
+
+  const router = useRouter();
+
+  const handleCar = () => {
+    router.push("/carrinho");
+  };
+
+  const handleBagClick = () => {
+    handleCar();
+  };
 
   return (
     <>
@@ -59,12 +70,22 @@ export default function HeaderHome() {
               <HeaderSocialIcon>
                 {rightIcons.map((IconComponent, index) => (
                   <HeaderSvgRight key={index}>
-                    <IconComponent
-                      size={26}
-                      style={{
-                        cursor: "pointer",
-                      }}
-                    />
+                    {IconComponent === Bag ? (
+                      <IconComponent
+                        size={26}
+                        style={{
+                          cursor: "pointer",
+                        }}
+                        onClick={handleBagClick}
+                      />
+                    ) : (
+                      <IconComponent
+                        size={26}
+                        style={{
+                          cursor: "pointer",
+                        }}
+                      />
+                    )}
                   </HeaderSvgRight>
                 ))}
               </HeaderSocialIcon>

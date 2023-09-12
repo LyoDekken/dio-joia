@@ -87,9 +87,9 @@ export default function HeaderHoverify({ isVisible }: any) {
                     )}
                   </HeaderSvgRight>
                 ))}
-                <HandleHamburger onClick={() => setIsTabletMenuOpen(!isTabletMenuOpen)}>
+                {/* <HandleHamburger onClick={() => setIsTabletMenuOpen(!isTabletMenuOpen)}>
                   ☰
-                </HandleHamburger>
+                </HandleHamburger> */}
               </HeaderSocialIcon>
             </HeaderSectionRight>
           </AboveHeaderWrapTest>
