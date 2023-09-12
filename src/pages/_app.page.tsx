@@ -11,6 +11,7 @@ import HeaderHoverify from "@/components/Header";
 import FooterHomeHoverify from "@/components/Footer";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { ProductProvider } from "@/context";
+import { CartProvider } from "@/context/cart";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -31,10 +32,12 @@ const App = ({ Component, pageProps }: AppProps) => {
         }}
       />
 
-      <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
-      <Component {...pageProps} />
-      <WhatsAppIcon />
-      <FooterHomeHoverify />
+      <CartProvider>
+        <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
+        <Component {...pageProps} />
+        <WhatsAppIcon />
+        <FooterHomeHoverify />
+      </CartProvider>
 
       <GlobalStyles />
     </ThemeProvider>

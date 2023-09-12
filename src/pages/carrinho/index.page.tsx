@@ -1,10 +1,7 @@
-"use client";
 import React from "react";
 
 import { useRouter } from "next/router";
-import { parseCookies, destroyCookie } from "nookies";
 import { XCircle } from "@phosphor-icons/react";
-import { GetStaticProps } from "next";
 
 import {
   Article,
@@ -28,12 +25,26 @@ import {
   TableValueA,
   DivResponsive,
 } from "./styles";
+import { useCart } from "@/context/cart";
 
-const Cart = ({ cartItems }: any) => {
+const Cart = () => {
   const router = useRouter();
+  const { cartItems } = useCart();
 
-  const handleRemoveFromCart = () => {
-    destroyCookie(null, "@diojoiasemprata-cart-test");
+  const handleRemoveFromCart = (itemIndex: number) => {
+    // Crie uma cópia do carrinho atual
+    const updatedCart = [...cartItems];
+
+    // Remova o item pelo índice
+    updatedCart.splice(itemIndex, 1);
+
+    // Atualize o carrinho no Local Storage
+    localStorage.setItem(
+      "@diojoiasemprata-cart-test",
+      JSON.stringify(updatedCart)
+    );
+
+    // Recarregue a página para refletir as alterações no carrinho
     router.reload();
   };
 
@@ -67,7 +78,7 @@ const Cart = ({ cartItems }: any) => {
                     <DivTH>
                       <XCircle
                         cursor={"pointer"}
-                        onClick={() => handleRemoveFromCart()}
+                        onClick={() => handleRemoveFromCart(index)} // Passa o índice para a função
                         size={32}
                       />
                     </DivTH>
@@ -131,30 +142,6 @@ const TransparentTable = () => {
       </TableRow>
     </TableContainer>
   );
-};
-
-export const getServerSideProps: GetStaticProps = async (context: any) => {
-  const cookies = parseCookies(context);
-  const cartItems = cookies["@diojoiasemprata-cart-test"];
-  let item = [];
-
-  if (cartItems) {
-    const view = JSON.parse(cartItems);
-
-    item.push(view);
-
-    return {
-      props: {
-        cartItems: item,
-      },
-    };
-  } else {
-    return {
-      props: {
-        cartItems: [],
-      },
-    };
-  }
 };
 
 export default Cart;

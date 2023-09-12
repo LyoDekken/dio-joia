@@ -22,11 +22,10 @@ import {
   ShortDescription,
   SumaryText,
 } from "./styles";
-import { setCookie } from "nookies";
 
 export default function SumaryProduct({ product }: any) {
   console.log(product);
-  
+
   const options = [];
 
   options.push(
@@ -48,10 +47,21 @@ export default function SumaryProduct({ product }: any) {
       value: product.value,
     };
 
-    setCookie(null, "@diojoiasemprata-cart-test", JSON.stringify(productInfo), {
-      maxAge: 30 * 24 * 60 * 60,
-      path: "/",
-    });
+    // Verifique se já existe um carrinho no Local Storage
+    const existingCart = localStorage.getItem("@diojoiasemprata-cart-test");
+    let updatedCart = [];
+
+    if (existingCart) {
+      updatedCart = JSON.parse(existingCart);
+    }
+
+    updatedCart.push(productInfo);
+
+    // Atualize o carrinho no Local Storage
+    localStorage.setItem(
+      "@diojoiasemprata-cart-test",
+      JSON.stringify(updatedCart)
+    );
 
     alert("Produto adicionado ao carrinho!");
   };
