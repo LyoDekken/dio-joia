@@ -20,6 +20,7 @@
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
     "next-seo": "^6.1.0",
+    "nookies": "^2.5.2",
     "phosphor-icons": "^1.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@types/cookie": "^0.5.2",
     "@types/styled-components": "^5.1.26",
     "jest": "^27.5.1",
     "jest-styled-components": "^7.1.1"

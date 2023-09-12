@@ -22,6 +22,7 @@ import {
   ShortDescription,
   SumaryText,
 } from "./styles";
+import { setCookie } from "nookies";
 
 export default function SumaryProduct({ product }: any) {
   const options = [];
@@ -38,6 +39,21 @@ export default function SumaryProduct({ product }: any) {
       </NavContainerSelectOption>
     );
   }
+
+  const handleAddToCart = () => {
+    // Crie um objeto com as informações do produto
+    const productInfo = {
+      title: product.title,
+      value: product.value,
+    };
+
+    setCookie(null, "@diojoiasemprata-cart-test", JSON.stringify(productInfo), {
+      maxAge: 30 * 24 * 60 * 60,
+      path: "/",
+    });
+
+    console.log("Produto adicionado ao carrinho!");
+  };
 
   return (
     <ContainerSumary>
@@ -65,7 +81,9 @@ export default function SumaryProduct({ product }: any) {
 
         <NavContainerSelectValue>
           <NavContainerInputSelect />
-          <NavContainerButtonSelect>Comprar</NavContainerButtonSelect>
+          <NavContainerButtonSelect onClick={handleAddToCart}>
+            Comprar
+          </NavContainerButtonSelect>
         </NavContainerSelectValue>
       </NumerationForm>
       <NavContainerSpanProduct>SKU: AL100</NavContainerSpanProduct>
