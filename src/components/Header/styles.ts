@@ -242,3 +242,11 @@ export const SiteIdentity = styled.div`
   vertical-align: middle;
   word-wrap: anywhere;
 `;
+
+export const HandleHamburger = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block; 
+  }
+`;

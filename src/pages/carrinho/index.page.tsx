@@ -1,8 +1,9 @@
+"use client";
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 import { XCircle } from "@phosphor-icons/react";
 
 const Container = styled.div`
@@ -361,18 +362,29 @@ export const FinalizationBuy = styled.div`
 const Cart = ({ cartItems }: any) => {
   const router = useRouter();
 
-  const update = JSON.parse(cartItems);
+  const update = cartItems ? JSON.parse(cartItems) : [];
 
   let itemArray = [];
   itemArray.push(update);
+
+  const handleRemoveFromCart = () => {
+    destroyCookie(null, "@diojoiasemprata-cart-test");
+  };
 
   return (
     <Container>
       <ContainerDiv>
         <Article>
           <ContainerArticleTitle>Carrinho</ContainerArticleTitle>
-          {!itemArray ? (
-            <div>Carrinho vazio</div>
+          {update.length === 0 ? (
+            <div>
+              <div>Carrinho vazio</div>
+              <FinalizationBuy>
+                <BackButton onClick={() => router.push("/")}>
+                  Retornar para loja
+                </BackButton>
+              </FinalizationBuy>
+            </div>
           ) : (
             <DivResponsive>
               <DivTableTh>
@@ -393,7 +405,11 @@ const Cart = ({ cartItems }: any) => {
                 ) => (
                   <DivTableTd key={index}>
                     <DivTH>
-                      <XCircle size={32} />
+                      <XCircle
+                        cursor={"pointer"}
+                        onClick={() => handleRemoveFromCart()}
+                        size={32}
+                      />
                     </DivTH>
                     <DivTH>
                       <ImageCarrinho
@@ -414,21 +430,21 @@ const Cart = ({ cartItems }: any) => {
                   </DivTableTd>
                 )
               )}
+              <DivCart>
+                {itemArray && (
+                  <ValorTotal>
+                    <ValorTotalTitulo>Total no carrinho</ValorTotalTitulo>
+                    <TransparentTable />
+                  </ValorTotal>
+                )}
+                <FinalizationBuy>
+                  <BackButton onClick={() => router.push("/")}>
+                    Retornar para loja
+                  </BackButton>
+                </FinalizationBuy>
+              </DivCart>
             </DivResponsive>
           )}
-          <DivCart>
-            {itemArray && (
-              <ValorTotal>
-                <ValorTotalTitulo>Total no carrinho</ValorTotalTitulo>
-                <TransparentTable />
-              </ValorTotal>
-            )}
-            <FinalizationBuy>
-              <BackButton onClick={() => router.push("/")}>
-                Retornar para loja
-              </BackButton>
-            </FinalizationBuy>
-          </DivCart>
         </Article>
       </ContainerDiv>
     </Container>
@@ -541,7 +557,7 @@ const TransparentTable = () => {
 
 export async function getServerSideProps(context: any) {
   const cookies = parseCookies(context);
-  const cartItems = cookies["@diojoiasemprata-cart-test"];
+  const cartItems = cookies["@diojoiasemprata-cart-test"] || "[]"; // Defina como uma matriz vazia se for undefined
 
   return {
     props: {

@@ -9,8 +9,9 @@ export const AboveHeaderBarPrimary = styled.div`
     border-bottom-width: 1px;
   }
 
-  @media (max-width: 921px) {
+  @media (max-width: 960px) {
     background-image: none;
+    display: none;
   }
 
   background-color: transparent;

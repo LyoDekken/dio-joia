@@ -19,8 +19,19 @@ export default function Produto({ product, stock }: any) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const ids = [
+    "5ff46ec1-5588-45ff-989e-fb24aedbfb03",
+    "33a99c0e-634b-4f3f-a4c4-33034488b7fd",
+    "0f5403c2-b49f-4724-b556-3355d9bf0b2d",
+    "cd4dee87-fa96-47d0-8d4a-77bdddf8b99d",
+    "d932533a-ed16-4e4c-b0c0-3b55f5bdb928",
+    "b8d98fb9-67f1-44a2-bc50-ce6ce966b521",
+  ];
+
+  const paths = ids.map((id) => ({ params: { id } }));
+
   return {
-    paths: [{ params: { id: "5ff46ec1-5588-45ff-989e-fb24aedbfb03" } }],
+    paths,
     fallback: "blocking",
   };
 };
