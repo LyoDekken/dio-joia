@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { parseCookies, destroyCookie } from "nookies";
 import { XCircle } from "@phosphor-icons/react";
+import { GetStaticProps } from "next";
+import { cookies } from "next/headers";
 
 const Container = styled.div`
   box-sizing: inherit;
@@ -358,10 +361,13 @@ export const FinalizationBuy = styled.div`
   word-wrap: break-word;
 `;
 
-const Cart = ({ cartItems }: any) => {
+const Cart = () => {
   const router = useRouter();
+  const cookies = parseCookies();
 
-  const update = cartItems ? JSON.parse(cartItems) : [];
+  const myCookie = cookies["@diojoiasemprata-cart-test"];
+
+  const update = myCookie ? JSON.parse(myCookie) : [];
 
   let itemArray = [];
   itemArray.push(update);
@@ -375,7 +381,7 @@ const Cart = ({ cartItems }: any) => {
       <ContainerDiv>
         <Article>
           <ContainerArticleTitle>Carrinho</ContainerArticleTitle>
-          {update.length === 0 ? (
+          {itemArray.length === 0 ? (
             <div>
               <div>Carrinho vazio</div>
               <FinalizationBuy>
@@ -394,41 +400,33 @@ const Cart = ({ cartItems }: any) => {
                 <DivTH>Quantidade</DivTH>
                 <DivTH>Subtotal</DivTH>
               </DivTableTh>
-              {itemArray.map(
-                (
-                  item: {
-                    title: string;
-                    value: number;
-                  },
-                  index: number
-                ) => (
-                  <DivTableTd key={index}>
-                    <DivTH>
-                      <XCircle
-                        cursor={"pointer"}
-                        onClick={() => handleRemoveFromCart()}
-                        size={32}
-                      />
-                    </DivTH>
-                    <DivTH>
-                      <ImageCarrinho
-                        alt="Carrrinho Produto"
-                        height={300}
-                        width={300}
-                        src={
-                          "https://diojoiasemprata.com.br/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-28-at-08.44.03-2-300x300.jpeg"
-                        }
-                      />
-                    </DivTH>
-                    <DivTH>{item.title}</DivTH>
-                    <DivTH>R${item?.value}</DivTH>
-                    <DivTH>
-                      <NavContainerInputSelect />
-                    </DivTH>
-                    <DivTH>R${item?.value}</DivTH>
-                  </DivTableTd>
-                )
-              )}
+              {itemArray.map((item: any, index: number) => (
+                <DivTableTd key={index}>
+                  <DivTH>
+                    <XCircle
+                      cursor={"pointer"}
+                      onClick={() => handleRemoveFromCart()}
+                      size={32}
+                    />
+                  </DivTH>
+                  <DivTH>
+                    <ImageCarrinho
+                      alt="Carrrinho Produto"
+                      height={300}
+                      width={300}
+                      src={
+                        "https://diojoiasemprata.com.br/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-28-at-08.44.03-2-300x300.jpeg"
+                      }
+                    />
+                  </DivTH>
+                  <DivTH>{item.title}</DivTH>
+                  <DivTH>R${item?.value}</DivTH>
+                  <DivTH>
+                    <NavContainerInputSelect />
+                  </DivTH>
+                  <DivTH>R${item?.value}</DivTH>
+                </DivTableTd>
+              ))}
               <DivCart>
                 {itemArray && (
                   <ValorTotal>
@@ -554,15 +552,15 @@ const TransparentTable = () => {
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const cookies = parseCookies(context);
-  const cartItems = cookies["@diojoiasemprata-cart-test"] || "[]"; // Defina como uma matriz vazia se for undefined
+// export const getServerSideProps: GetStaticProps = async (context: any) => {
+//   const cookies = parseCookies(context);
+//   const cartItems = cookies["@diojoiasemprata-cart-test"];
 
-  return {
-    props: {
-      cartItems,
-    },
-  };
-}
+//   return {
+//     props: {
+//       cartItems,
+//     },
+//   };
+// };
 
 export default Cart;
