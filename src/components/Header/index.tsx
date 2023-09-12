@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   FacebookLogo,
   InstagramLogo,
@@ -5,6 +6,8 @@ import {
   User,
   MagnifyingGlass,
   Bag,
+  List,
+  X,
 } from "@phosphor-icons/react";
 
 import {
@@ -18,15 +21,17 @@ import {
   HeaderSvgLeft,
   HeaderSvgRight,
   AboveHeaderWrap,
-  HandleHamburger,
+  BagValue,
+  ImageLeft,
+  MenuButton,
+  MenuButtonIcon,
 } from "./styles";
-import HeaderPrimary from "../HeaderPrimary";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import ModalContent from "../ModalContent";
+import HeaderPrimary from "../HeaderPrimary";
 
 export default function HeaderHoverify({ isVisible }: any) {
   const router = useRouter();
-  const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
 
   const handleCar = () => {
     router.push("/carrinho");
@@ -36,12 +41,29 @@ export default function HeaderHoverify({ isVisible }: any) {
     handleCar();
   };
 
-  if (!isVisible) {
-    return null;
-  }
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("@diojoiasemprata-cart-test");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
 
   const leftIcons = [FacebookLogo, InstagramLogo, PinterestLogo];
   const rightIcons = [User, MagnifyingGlass, Bag];
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isMenuButtonActive, setMenuButtonActive] = useState(false);
+
+  const toggleMenu = () => {
+    setModalOpen(!isModalOpen);
+    setMenuButtonActive(!isMenuButtonActive);
+  };
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <>
@@ -50,6 +72,13 @@ export default function HeaderHoverify({ isVisible }: any) {
           <AboveHeaderWrapTest>
             <HeaderSectionLeft>
               <HeaderSocialIcon>
+                <ImageLeft
+                  src="https://diojoiasemprata.com.br/wp-content/uploads/2022/04/dio-logo-light-10.png"
+                  alt="Logo"
+                  width={1000}
+                  height={1000}
+                />
+
                 {leftIcons.map((IconComponent, index) => (
                   <HeaderSvgLeft key={index}>
                     <IconComponent
@@ -67,30 +96,72 @@ export default function HeaderHoverify({ isVisible }: any) {
             <HeaderSectionRight>
               <HeaderAboveSectionRight />
               <HeaderSocialIcon>
-                {rightIcons.map((IconComponent, index) => (
-                  <HeaderSvgRight key={index}>
-                    {IconComponent === Bag ? (
-                      <IconComponent
+                <>
+                  {rightIcons.map((IconComponent, index) => (
+                    <HeaderSvgRight key={index}>
+                      {IconComponent === Bag ? (
+                        <div style={{ position: "relative" }}>
+                          <Bag
+                            onClick={handleBagClick}
+                            size={32}
+                            style={{
+                              position: "relative",
+                              cursor: "pointer",
+                            }}
+                          />
+                          <BagValue>{cart.length}</BagValue>
+                        </div>
+                      ) : (
+                        <IconComponent
+                          size={26}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        />
+                      )}
+                    </HeaderSvgRight>
+                  ))}
+                  <MenuButtonIcon onClick={toggleMenu}>
+                    {isMenuButtonActive ? (
+                      <X
                         size={26}
                         style={{
+                          padding: "5px",
                           cursor: "pointer",
                         }}
-                        onClick={handleBagClick}
                       />
                     ) : (
-                      <IconComponent
+                      <List
                         size={26}
                         style={{
+                          padding: "5px",
                           cursor: "pointer",
                         }}
                       />
                     )}
-                  </HeaderSvgRight>
-                ))}
-                {/* <HandleHamburger onClick={() => setIsTabletMenuOpen(!isTabletMenuOpen)}>
-                  ☰
-                </HandleHamburger> */}
+                  </MenuButtonIcon>
+                </>
+                <MenuButton onClick={toggleMenu}>
+                  {isMenuButtonActive ? (
+                    <X
+                      size={26}
+                      style={{
+                        padding: "5px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  ) : (
+                    <List
+                      size={26}
+                      style={{
+                        padding: "5px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  )}
+                </MenuButton>
               </HeaderSocialIcon>
+              {isModalOpen && <ModalContent />}
             </HeaderSectionRight>
           </AboveHeaderWrapTest>
         </AboveHeaderWrap>

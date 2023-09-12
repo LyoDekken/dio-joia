@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const AboveHeaderBar = styled.section`
   @media (min-width: 921px) {
@@ -31,6 +32,7 @@ export const AboveHeaderWrap = styled.div`
 
   @media (max-width: 922px) {
     max-width: 1240px;
+    margin: 0 10px;
   }
 
   align-content: center;
@@ -50,6 +52,10 @@ export const AboveHeaderWrap = styled.div`
 `;
 
 export const AboveHeaderWrapTest = styled.div`
+  @media (max-width: 544px) {
+    margin-top: 40px;
+  }
+
   align-items: center;
   box-sizing: inherit;
   color: #4a4a4a;
@@ -147,6 +153,10 @@ export const HeaderSvgLeft = styled.div`
     margin-right: 20px;
   }
 
+  @media (max-width: 544px) {
+    display: none;
+  }
+
   box-sizing: inherit;
   display: block;
   color: #fcfcfc;
@@ -168,8 +178,14 @@ export const HeaderSvgLeft = styled.div`
 export const HeaderSvgRight = styled.div`
   @media (max-width: 921px) {
     height: 24px;
-    width: 24px;
-    margin-left: 20px;
+    width: 36px;
+    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 0px;
+  }
+
+  @media (max-width: 544px) {
+    display: none;
   }
 
   box-sizing: inherit;
@@ -208,16 +224,13 @@ export const HeaderSocialIcon = styled.div`
   word-wrap: anywhere;
 `;
 
-export const HeaderLogoSite = styled.img`
+export const HeaderLogoSite = styled(Image)`
   @media (max-width: 921px) {
     max-width: 120px;
   }
 
   @media (max-width: 544px) {
-    max-width: 200px;
-  }
-
-  @media (max-width: 543px) {
+    display: none;
     max-width: 100px;
   }
 
@@ -250,4 +263,91 @@ export const SiteIdentity = styled.div`
   transition: all 0.2s linear 0s;
   vertical-align: middle;
   word-wrap: anywhere;
+`;
+
+export const ImageLeft = styled(Image)`
+  @media (min-width: 544px) {
+    display: none;
+  }
+
+  max-width: 160px;
+  max-height: 56px;
+  width: 160px;
+  height: 56px;
+  box-sizing: inherit;
+  display: flex;
+  align-items: center;
+  outline: none;
+  flex-direction: row;
+  word-wrap: anywhere;
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-self: flex-start;
+  align-items: flex-start;
+`;
+
+export const MenuButtonIcon = styled.div`
+  @media (min-width: 767px) {
+    display: none;
+  }
+
+  @media (max-width: 547px) {
+    display: none;
+  }
+
+  background-color: white;
+  box-sizing: inherit;
+  height: 30px;
+  width: 30px;
+  margin-left: 5px;
+  color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  line-height: 27.8571px;
+  outline: none;
+  flex-direction: row;
+  word-wrap: anywhere;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+`;
+
+export const BagValue = styled.p`
+  position: absolute;
+  top: 50%;
+
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const MenuButton = styled.div`
+  @media (min-width: 544px) {
+    display: none;
+  }
+
+  background-color: white;
+  box-sizing: inherit;
+  height: 30px;
+  width: 30px;
+  color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  line-height: 27.8571px;
+  outline: none;
+  flex-direction: row;
+  word-wrap: anywhere;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
 `;

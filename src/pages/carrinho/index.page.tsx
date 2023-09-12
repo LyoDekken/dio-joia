@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { XCircle } from "@phosphor-icons/react";
 
@@ -29,23 +28,28 @@ import { useCart } from "@/context/cart";
 
 const Cart = () => {
   const router = useRouter();
-  const { cartItems } = useCart();
+
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("@diojoiasemprata-cart-test");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
 
   const handleRemoveFromCart = (itemIndex: number) => {
-    // Crie uma cópia do carrinho atual
-    const updatedCart = [...cartItems];
+    const updatedCart = [...cart];
 
-    // Remova o item pelo índice
     updatedCart.splice(itemIndex, 1);
 
-    // Atualize o carrinho no Local Storage
     localStorage.setItem(
       "@diojoiasemprata-cart-test",
       JSON.stringify(updatedCart)
     );
 
-    // Recarregue a página para refletir as alterações no carrinho
-    router.reload();
+    alert("Item Deletado");
+    setCart(updatedCart);
   };
 
   return (
@@ -53,7 +57,7 @@ const Cart = () => {
       <ContainerDiv>
         <Article>
           <ContainerArticleTitle>Carrinho</ContainerArticleTitle>
-          {cartItems.length === 0 ? (
+          {cart.length === 0 ? (
             <div>
               <div>Carrinho vazio</div>
               <FinalizationBuy>
@@ -73,7 +77,7 @@ const Cart = () => {
                   <DivTH>Quantidade</DivTH>
                   <DivTH>Subtotal</DivTH>
                 </DivTableTh>
-                {cartItems.map((item: any, index: number) => (
+                {cart.map((item: any, index: number) => (
                   <DivTableTd key={index}>
                     <DivTH>
                       <XCircle
@@ -103,7 +107,7 @@ const Cart = () => {
               </DivResponsive>
 
               <DivCart>
-                {cartItems && (
+                {cart.length > 0 && (
                   <ValorTotal>
                     <ValorTotalTitulo>Total no carrinho</ValorTotalTitulo>
                     <TransparentTable />

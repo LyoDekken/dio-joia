@@ -33,10 +33,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       />
 
       <CartProvider>
-        <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
-        <Component {...pageProps} />
-        <WhatsAppIcon />
-        <FooterHomeHoverify />
+        <>
+          <HeaderHoverify isVisible={!shouldHideHeaderFooter} />
+          <Component {...pageProps} />
+          <WhatsAppIcon />
+          <FooterHomeHoverify />
+        </>
       </CartProvider>
 
       <GlobalStyles />
