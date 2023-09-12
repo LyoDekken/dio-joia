@@ -25,6 +25,8 @@ import {
 import { setCookie } from "nookies";
 
 export default function SumaryProduct({ product }: any) {
+  console.log(product);
+  
   const options = [];
 
   options.push(
@@ -41,7 +43,6 @@ export default function SumaryProduct({ product }: any) {
   }
 
   const handleAddToCart = () => {
-    // Crie um objeto com as informações do produto
     const productInfo = {
       title: product.title,
       value: product.value,
@@ -52,7 +53,7 @@ export default function SumaryProduct({ product }: any) {
       path: "/",
     });
 
-    console.log("Produto adicionado ao carrinho!");
+    alert("Produto adicionado ao carrinho!");
   };
 
   return (

@@ -417,7 +417,6 @@ export const NavContainerButtonSelect = styled.button`
   box-shadow: none;
   box-sizing: inherit;
   color: #ffffff;
-  cursor: not-allowed;
   display: inline-block;
   font: inherit;
   line-height: 15px;
@@ -436,14 +435,6 @@ export const NavContainerButtonSelect = styled.button`
 
   &:focus {
     background-color: #a7cca5;
-    border-color: rgb(167, 204, 165);
-    box-shadow: none;
-    color: #000000;
-    outline: 0px;
-  }
-
-  &:focus {
-    background-color: #9fb2a0;
     border-color: rgb(167, 204, 165);
     box-shadow: none;
     color: #000000;
